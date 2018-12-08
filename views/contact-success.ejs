@@ -40,31 +40,9 @@
   <div class="middle">
   
   <h2>Contact Us</h2>
-  <p>   We Care cares about your opinions! Fill the form below and reach us out! </p> 
- 
-  <form id="contact-form" method="POST" action="/contact" >
-    <table>
-        <tr><td>
-            <label for="name">Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" name="name">
-        </td></tr>
-        <tr><td>
-            <label for="surname">Surname &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" name="surname">
-        </td></tr>
-        <tr><td>
-            <label for="email">Mail address  &nbsp;&nbsp;&nbsp;</label>
-            <input type="email" name="email">
-        </td></tr>
-        <tr><td>
-            <label for="message">Your message    &nbsp;</label>
-            <input type="text" name="message"></td></tr>
-        <tr align="middle"><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="submit" name="submit">
-        </td></tr>
-</table>
-</form>
+  <p> Thanks for getting in touch, <%=data.name%>  <%=data.surname%></p> 
+  <p> We will reply to you at, <%=data.email%></p>
+  
 </div>
 
    
