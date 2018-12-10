@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/main.css" rel= "stylesheet" type="text/css">
+    
+        <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <title>MAPD712 Test</title>
+</head>
+
+<body>
+
+<div class="jumbotron">
+  <h1>Welcome to WeCare</h1>
+  <p>We are here to ease the lives of personnels in hospitals!</p>  
+</div>
+<div class="container">
+</div>
+
+<div style="overflow:auto">
+
+    <div class="navigation">
+    <a href="home">Home</a>
+    <a href="newpatient">Add Patient</a>
+    <a href="patients">List Patient</a>
+    <a href="about">About</a>
+    <a href="contact">Contact Us</a> 
+  </div>
+
+  <div class="middle">
+        <h2> Patients Information</h2>
+<h3> <%=data.first_name %></h3>
+        <table>
+                <thead>
+                    <tr>
+
+                        <th>FirstName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>Last Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>Date of Birth &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>Mail Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>Date Admitted &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>Department &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>Ailment &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>    
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+    </div>
+</div>
+
+<div class="copyright">MAPD712, Group2, TORONTO Ontario</div>
+
+</body>
+
+<script language="JavaScript">
+
+        $(function() {
+            alert("ICERDE");
+            var result = sessionStorage.getItem("last_name");
+            console.log("result");
+            alert(result)
+            $.ajax({
+                type: "GET",
+                url: '/singlePatientInfo/Bayral',
+                contentType: 'application/json',
+                success: function(response) {
+                   console.log("RESPONSE " + response + " BUDUR");
+                    var tbodyEl = $('tbody');
+                    var x = response;
+                    console.log(response);
+                    tbodyEl.html('');
+        
+                    
+                        tbodyEl.append('\
+                            <tr>\
+                                <td class="id">' + x.first_name + '</td>\
+                                <td class="id">' + x.last_name + '</td>\
+                                <td class="id">' + x.date_of_birth + '</td>\
+                                <td class="id">' + x.address + '</td>\
+                                <td class="id">' + x.mail_address + '</td>\
+                                <td class="id">' + x.date_admitted + '</td>\
+                                <td class="id">' + x.department + '</td>\
+                                <td class="id">' + x.ailment + '</td>\
+                            </tr>\
+                        ');
+                    
+                        /*deneme.append('\
+                        <div class="card" style="width: 18rem;">\
+                                <div class="card-header">\
+                                <p>' + patient.first_name + '</p>\
+                            </div>\
+                            <div class="card-body">\
+                                <p>' + patient.last_name + '</p>\
+                            </div>\
+                        ');*/
+                    
+                }
+            });
+        });
+        
+        </script>
+</html>

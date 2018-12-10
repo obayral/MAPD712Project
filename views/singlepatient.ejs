@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="assets/main.css" rel= "stylesheet" type="text/css">
+
+<script type="text/javascript" src="main.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>MAPD712 Test</title>
+</head>
+
+<body>
+
+<div class="jumbotron">
+  <h1>Welcome to WeCare</h1>
+  <p>We are here to ease the lives of personnels in hospitals!</p>  
+</div>
+<div class="container">
+</div>
+
+<div style="overflow:auto">
+
+    <div class="navigation">
+    <a href="home">Home</a>
+    <a href="newpatient">Add Patient</a>
+    <a href="patients">List Patient</a>
+    <a href="about">About</a>
+    <a href="contact">Contact Us</a> 
+  </div>
+
+  <div class="middle">
+  
+  <h2>Get Single Patient</h2>
+  <table>
+      <thead>
+          <tr>
+              <th>FirstName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+              <th>Last Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+              <th>Date of Birth &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+              <th>Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+              <th>Mail Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+              <th>Date Admitted &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+              <th>Department &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+              <th>Ailment &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>    
+          </tr>
+      </thead>
+      <tbody></tbody>
+  </table>
+
+  <h4>Please enter the patient's surname to get the records.</h4>
+  
+  <form id="patient-form" method="POST" action="/singlepatientresult" >
+    <table>
+        <tr><td>
+            <label for="last_name">Patient Surname &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" name="last_name">
+        </td></tr>
+        <tr><td>
+        <input type="submit" name="submit" onclick="deger()">
+        </td></tr>
+</table>
+</form>
+</div>
+
+   
+</div>
+
+<div class="copyright">MAPD712, Group2, TORONTO Ontario</div>
+
+</body>
+
+<script language="JavaScript">
+  
+    function deger() {
+      alert("ICERIYEE");
+        sessionStorage.setItem("lastname",document.getElementById("last_name").value);
+        var x = document.getElementById("last_name").value;
+        alert("haydaaa: " + x);
+    };
+    </script>
+</html>

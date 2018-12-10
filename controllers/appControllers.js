@@ -60,6 +60,12 @@ module.exports = function(app){
         console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
         res.render("about");
     });
+    app.get('/people',function(req,res){
+        console.log("ABOUT PAGE");
+        getRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        res.render("info");
+    });
 
     app.get('/newpatient',function(req,res){
         console.log("NEW PATIENT PAGE");
@@ -101,4 +107,31 @@ module.exports = function(app){
         console.log('received GET request.');
     })
 
+
+
+    app.get('/singlepatient',function(req,res){
+        console.log("NEW PATIENT PAGE");
+        getRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        res.render("singlepatient");
+    });
+    app.post('/singlepatientresult',urlencodedParser,function(req,res){
+        console.log("SINGLE LOLOLOLO");
+        getRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        res.render("singlepatientresult",{data: req.body});
+    });
+    
+    
+    // Get a single patient by its patient id
+    app.get('/singlePatientInfo/:last_name', function (req, res, next) {
+        getRequestCounter++;
+        console.log('received GET request.');
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        // Find a single patient by their surname within save
+        Patient.findOne({last_name: req.params.last_name }, function (error, data) {
+            res.send(data)
+        });
+        console.log('received GET request.');
+  })
 }
