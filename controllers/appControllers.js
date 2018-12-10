@@ -29,6 +29,7 @@ var patientSchema = new mongoose.Schema({
   });
 var Patient = mongoose.model('Patient', patientSchema);
 
+
 module.exports = function(app){
     app.get('/',function(req,res){
         getRequestCounter++;
@@ -83,13 +84,21 @@ module.exports = function(app){
         getRequestCounter++;
         console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
         Patient.find({},function(err, data){
-            if(err) throw err;
-            res.send(data)
+            res.render("patients", {collection: data});
+           
         });
-        
         console.log('received GET request.');
     })
-  
 
+    // Get all patients in the system
+    app.get('/patientsInfo', function (req, res, next) {
+        console.log("ALL PATIENTS PAGE");
+        getRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        Patient.find({},function(err, data){
+            res.send(data)
+        });
+        console.log('received GET request.');
+    })
 
 }
