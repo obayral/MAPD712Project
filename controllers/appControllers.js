@@ -27,6 +27,18 @@ var patientSchema = new mongoose.Schema({
     department: String,
     ailment: String
   });
+
+  var userSchema = new mongoose.Schema({
+    first_name: String,
+    last_name: String, 
+    date_of_birth: String,
+    address: String,
+    mail_address: String,
+    username: String,
+    password: String
+  });  
+
+var User = mongoose.model('User', userSchema);
 var Patient = mongoose.model('Patient', patientSchema);
 
 
@@ -34,7 +46,7 @@ module.exports = function(app){
     app.get('/',function(req,res){
         getRequestCounter++;
         console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
-        res.render("index");
+        res.render("login");
     });
     app.get('/home',function(req,res){
         getRequestCounter++;
@@ -146,4 +158,54 @@ module.exports = function(app){
         });
         console.log('received GET request.');
   })
+  
+    app.get('/login',function(req,res){
+        console.log("LOGIN PAGE");
+        getRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        res.render("login");
+    });
+    app.post('/login',urlencodedParser,function(req,res){
+        console.log("LOGIN ATTEMPT");
+        console.log("USERNAME BUDUR: " + req.query.user_name);
+        console.log("PASSWORD BUDUR: " + req.query.password);
+        
+        postRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        User.findOne({username: req.query.user_name,password:req.query.password }, function (error, data) {
+            if (data) {
+                // Send the patient if no issues
+                res.render("index");
+                console.log('Sending response to login request.');
+                console.log('OK');
+            } else {
+                // Send 404 header if the patient doesn't exist
+                res.render("error");
+                console.log("Error occurred in sending Response.");
+            }
+        });
+    });
+
+    app.get('/register',function(req,res){
+        console.log("REGISTRATION PAGE");
+        getRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        res.render("register");
+    });
+    
+    app.post('/register',urlencodedParser,function(req,res){
+        postRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        console.log(req.body);
+        var newUser = User(req.body).save(function(err,data){
+            if (err) throw err;
+            res.render("login",{data: req.body});
+        })
+    });
+    app.get('/logout',function(req,res){
+        console.log("LOG OUT");
+        getRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        res.render("login");
+    });
 }
