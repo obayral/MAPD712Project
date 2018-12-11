@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/main.css" rel= "stylesheet" type="text/css">
+    
+        <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <title>MAPD712 Test</title>
+</head>
+
+<body>
+
+<div class="jumbotron">
+  <h1>Welcome to WeCare</h1>
+  <p>We are here to ease the lives of personnels in hospitals!</p>  
+</div>
+
+
+<div style="overflow:auto">
+
+    <div class="navigation">
+    <a href="home">Home</a>
+    <a href="newpatient">Add Patient</a>
+    <a href="patients">List Patient</a>
+    <a href="about">About</a>
+    <a href="contact">Contact Us</a> 
+  </div>
+  <div class ="container">
+  
+  <div class = "row">
+      <div class = "col-lg-9 offset-lg-3">
+  <div class="middle">
+        <h2 align="right"> Patients' Records</h2>
+        <div id="clientName" class="d-flex custom_flex"></div>
+        
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="copyright">MAPD712, Group2, TORONTO Ontario</div>
+
+</body>
+
+<script language="JavaScript">
+
+$(function() {
+    $.ajax({
+        url: '/recordsInfo',
+        contentType: 'application/json',
+        success: function(response) {
+           console.log("RESPONSE " + response + " BUDUR");
+            var tbodyEl = $('tbody');
+
+            tbodyEl.html('');
+
+            response.forEach(function(record) {
+                var div = clientName.appendChild(document.createElement('table'));
+                div.setAttribute("class","custom_card-body");
+                div.innerHTML = objToString(record);
+                
+                function objToString(record){
+                    var str = '';
+                    for(var p in record){
+                        if(record.hasOwnProperty(p)){
+                            str += p + ' : ' + record[p] + "<br>" + '\n';
+                        }
+                    }
+                    return str + "" + "<p>";
+                }
+                /*tbodyEl.append('\
+                    <tr>\
+                        <td class="id">' + patient.first_name + '</td>\
+                        <td class="id">' + patient.last_name + '</td>\
+                        <td class="id">' + patient.date_of_birth + '</td>\
+                        <td class="id">' + patient.address + '</td>\
+                        <td class="id">' + patient.mail_address + '</td>\
+                        <td class="id">' + patient.date_admitted + '</td>\
+                        <td class="id">' + patient.department + '</td>\
+                        <td class="id">' + patient.ailment + '</td>\
+                    </tr>\
+                ');*/
+            
+                /*deneme.append('\
+                <div class="card" style="width: 18rem;">\
+                        <div class="card-header">\
+                        <p>' + patient.first_name + '</p>\
+                    </div>\
+                    <div class="card-body">\
+                        <p>' + patient.last_name + '</p>\
+                    </div>\
+                ');*/
+            });
+        }
+    });
+});
+
+</script>
+</html>

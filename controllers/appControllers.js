@@ -36,11 +36,23 @@ var patientSchema = new mongoose.Schema({
     mail_address: String,
     username: String,
     password: String
-  });  
+  }); 
+  
+  var patientRecordSchema = new mongoose.Schema({
+    patient_id: String,
+    first_name: String,
+    last_name: String,
+    pulse: String,
+    blood_type: String,
+    cholesterol: String,
+    BMI: String,
+    previous_surgeries: String,
+    condition: String
+});
 
 var User = mongoose.model('User', userSchema);
 var Patient = mongoose.model('Patient', patientSchema);
-
+var PatientRecord = mongoose.model('PatientRecord', patientRecordSchema);
 
 module.exports = function(app){
     app.get('/',function(req,res){
@@ -73,7 +85,7 @@ module.exports = function(app){
         res.render("about");
     });
     app.get('/people',function(req,res){
-        console.log("ABOUT PAGE");
+        console.log("PEOPLE");
         getRequestCounter++;
         console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
         res.render("info");
@@ -95,6 +107,25 @@ module.exports = function(app){
             res.render("addedpatient",{data: req.body});
         })
     });
+    
+    //patient record
+    app.get('/newpatientrecord',function(req,res){
+        console.log("NEW PATIENT RECORD PAGE");
+        getRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        res.render("newpatientrecord");
+    });
+    
+    app.post('/newpatientrecord',urlencodedParser,function(req,res){
+        postRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        console.log(req.body);
+        var newPatientRecord = PatientRecord(req.body).save(function(err,data){
+            if (err) throw err;
+            res.render("addedrecord",{data: req.body});
+        })
+    });
+
     // Delete all patients in the system
     app.get('/deletepatients', function (req, res) {
         deleteRequestCounter++;
@@ -126,6 +157,30 @@ module.exports = function(app){
         getRequestCounter++;
         console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
         Patient.find({},function(err, data){
+            res.send(data)
+        });
+        console.log('received GET request.');
+    })
+
+
+    // Get all patients in the system
+    app.get('/records', function (req, res, next) {
+        console.log("ALL RECORDS PAGE");
+        getRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        Patient.find({},function(err, data){
+            res.render("records", {collection: data});
+           
+        });
+        console.log('received GET request.');
+    })
+
+    // Get all patients in the system
+    app.get('/recordsInfo', function (req, res, next) {
+        console.log("ALL RECORDS PAGE");
+        getRequestCounter++;
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        PatientRecord.find({},function(err, data){
             res.send(data)
         });
         console.log('received GET request.');
