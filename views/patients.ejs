@@ -20,8 +20,7 @@
   <h1>Welcome to WeCare</h1>
   <p>We are here to ease the lives of personnels in hospitals!</p>  
 </div>
-<div class="container">
-</div>
+
 
 <div style="overflow:auto">
 
@@ -32,26 +31,18 @@
     <a href="about">About</a>
     <a href="contact">Contact Us</a> 
   </div>
-
+  <div class ="container">
+  
+  <div class = "row">
+      <div class = "col-lg-9 offset-lg-3">
   <div class="middle">
-        <h2> Patients Information</h2>
-
-        <table>
-                <thead>
-                    <tr>
-                        <th>FirstName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        <th>Last Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        <th>Date of Birth &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        <th>Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        <th>Mail Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        <th>Date Admitted &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        <th>Department &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        <th>Ailment &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>    
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+        <h2 align="right"> Patients Information</h2>
+        <div id="clientName" class="d-flex custom_flex"></div>
+        
+        </div>
     </div>
+</div>
+</div>
 </div>
 
 <div class="copyright">MAPD712, Group2, TORONTO Ontario</div>
@@ -71,7 +62,20 @@ $(function() {
             tbodyEl.html('');
 
             response.forEach(function(patient) {
-                tbodyEl.append('\
+                var div = clientName.appendChild(document.createElement('table'));
+                div.setAttribute("class","custom_card-body");
+                div.innerHTML = objToString(patient);
+                
+                function objToString(patient){
+                    var str = '';
+                    for(var p in patient){
+                        if(patient.hasOwnProperty(p)){
+                            str += p + ' : ' + patient[p] + "<br>" + '\n';
+                        }
+                    }
+                    return str + "" + "<p>";
+                }
+                /*tbodyEl.append('\
                     <tr>\
                         <td class="id">' + patient.first_name + '</td>\
                         <td class="id">' + patient.last_name + '</td>\
@@ -82,7 +86,7 @@ $(function() {
                         <td class="id">' + patient.department + '</td>\
                         <td class="id">' + patient.ailment + '</td>\
                     </tr>\
-                ');
+                ');*/
             
                 /*deneme.append('\
                 <div class="card" style="width: 18rem;">\

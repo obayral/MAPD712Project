@@ -35,18 +35,33 @@ body{
 	
 }
 
+.custom_card-body{
+	width: 300px;
+	background-color: rgba(197, 187, 187, 0.959);
+	color: rgb(41, 113, 172);
+	border:12px solid white;
+	margin-left: 40px;
+	margin-top: 16px;
+	max-width: 300px;
+	text-align:left;
+	display: table-cell;
+	padding: 20px;
+}
+.custom_flex{
+	flex-wrap: wrap;
+}
 .navigation {
   float:left;
   width:20%;
   text-align:center;
 }
 .navigation a {
-  background-color:lightgray;
+  background-color:rgb(47, 124, 196);
   padding:8px;
   margin-top:7px;
   display:block;
   width:100%;
-  color:black;
+  color:white;
  }
  .navigation button {
 	background-color:lightgray;
@@ -72,14 +87,22 @@ body{
   padding:15px;
   text-align: center;
   margin-top:7px;
-  
 }
+
+.sidePhoto {
+	background-color:rgb(60, 170, 118);
+	float:left;
+	width:20%;
+	padding:15px;
+	text-align: center;
+	margin-top:7px;
+  }
 .side h4{
 	text-align: center;
 }
 
 .copyright{
-	background-color:red;
+	background-color:rgb(60, 170, 118);
 	text-align:center;
 	padding:10px;
 	margin-top:7px

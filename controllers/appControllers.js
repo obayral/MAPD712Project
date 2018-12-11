@@ -83,6 +83,18 @@ module.exports = function(app){
             res.render("addedpatient",{data: req.body});
         })
     });
+    // Delete all patients in the system
+    app.get('/deletepatients', function (req, res) {
+        deleteRequestCounter++;
+        console.log('received DELETE request.');
+        console.log("Processed Request Counter --> GET: " +  getRequestCounter + ", POST: " + postRequestCounter + ", PUT: " + putRequestCounter +", DELETE: " +deleteRequestCounter);
+        // Find every entity within the given collection
+        Patient.deleteMany({}, function (error) {
+        // Return all of the patients in the system
+        res.render("patients");
+        console.log('Sending response to DELETE request.');
+    })
+  })
 
     // Get all patients in the system
     app.get('/patients', function (req, res, next) {
